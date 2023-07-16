@@ -13,6 +13,8 @@ public class WriterCheck : MonoBehaviour
     public GameObject panelLose;
     private char [] charWrites;
     private char[] charTasks;
+    private int countRight = 0;
+    
 
     public void AddText()
     {
@@ -33,7 +35,23 @@ public class WriterCheck : MonoBehaviour
         
         charWrites = textWrite.text.ToCharArray();
         charTasks = textTask.text.ToCharArray();
-        if (charWrites == charTasks) panelWin.SetActive(true);
+        if (charWrites.Length == charTasks.Length) 
+        {
+            for(int i =0; i < charWrites.Length; i++)
+            {
+                if (charWrites[i] != charTasks[i])
+                {
+                    panelLose.SetActive(true);
+                    break;
+
+                }
+                else
+                {
+                    countRight += 1;
+                }
+            }
+            if(countRight == charTasks.Length) panelWin.SetActive(true);
+        } 
         if (charWrites.Length > charTasks.Length) panelLose.SetActive(false);
         if (panelWin.activeSelf) panelLose.SetActive(false);
     }
